@@ -15,10 +15,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
 const data_1 = require("./data");
 let PageController = class PageController {
+    allPages() {
+        return { pages: Object.values(data_1.default) };
+    }
     getPage(id) {
         return data_1.default[id];
     }
 };
+__decorate([
+    routing_controllers_1.Get('/pages'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Object)
+], PageController.prototype, "allPages", null);
 __decorate([
     routing_controllers_1.Get('/pages/:id'),
     __param(0, routing_controllers_1.Param('id')),

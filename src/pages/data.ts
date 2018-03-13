@@ -8,6 +8,8 @@ interface PageDatabase {
   [id: number]: Page
 }
 
+export type PageList = { pages: Page[] }
+
 const pagesById: PageDatabase = {
   1: {
       id: 1,
