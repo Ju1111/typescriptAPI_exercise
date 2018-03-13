@@ -28,6 +28,9 @@ let PageController = class PageController {
             throw new routing_controllers_1.NotFoundError('Cannot find page');
         return entity_1.default.merge(page, update).save();
     }
+    createPage(page) {
+        return page.save();
+    }
 };
 __decorate([
     routing_controllers_1.Get('/pages/:id'),
@@ -50,6 +53,14 @@ __decorate([
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], PageController.prototype, "updatePage", null);
+__decorate([
+    routing_controllers_1.Post('/pages'),
+    routing_controllers_1.HttpCode(201),
+    __param(0, routing_controllers_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [entity_1.default]),
+    __metadata("design:returntype", void 0)
+], PageController.prototype, "createPage", null);
 PageController = __decorate([
     routing_controllers_1.JsonController()
 ], PageController);

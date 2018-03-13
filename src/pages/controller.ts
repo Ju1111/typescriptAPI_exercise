@@ -1,4 +1,4 @@
-import { JsonController, Get, Param, Put, Body, NotFoundError } from 'routing-controllers'
+import { JsonController, Get, Param, Put, Body, NotFoundError, Post, HttpCode } from 'routing-controllers'
 import Page from './entity'
 
 @JsonController()
@@ -27,19 +27,12 @@ export default class PageController {
 
         return Page.merge(page, update).save()
       }
+
+  @Post('/pages')
+  @HttpCode(201)
+  createPage(
+    @Body() page: Page
+  ) {
+      return page.save()
+    }
 }
-
-
-//
-//
-//
-//     @Post('/pages')
-//       @HttpCode(201)
-//       createPage(
-//         @Body() body: Page
-//       ):
-//         Page {
-//           console.log(`Incoming POST body param:`, body)
-//           return body
-//         }
-// }
