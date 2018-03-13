@@ -13,54 +13,29 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
-const data_1 = require("./data");
+const entity_1 = require("./entity");
 let PageController = class PageController {
-    allPages() {
-        return {
-            pages: Object.values(data_1.default)
-        };
-    }
     getPage(id) {
-        return data_1.default[id];
+        return entity_1.default.findOneById(id);
     }
-    updatePage(id, body) {
-        console.log(`Incoming PUT body param:`, body);
-        return data_1.default[id];
-    }
-    createPage(body) {
-        console.log(`Incoming POST body param:`, body);
-        return body;
+    async allPages() {
+        const pages = await entity_1.default.find();
+        return { pages };
     }
 };
-__decorate([
-    routing_controllers_1.Get('/pages'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Object)
-], PageController.prototype, "allPages", null);
 __decorate([
     routing_controllers_1.Get('/pages/:id'),
     __param(0, routing_controllers_1.Param('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Object)
+    __metadata("design:returntype", void 0)
 ], PageController.prototype, "getPage", null);
 __decorate([
-    routing_controllers_1.Put('/pages/:id'),
-    __param(0, routing_controllers_1.Param('id')),
-    __param(1, routing_controllers_1.Body()),
+    routing_controllers_1.Get('/pages'),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object]),
-    __metadata("design:returntype", Object)
-], PageController.prototype, "updatePage", null);
-__decorate([
-    routing_controllers_1.Post('/pages'),
-    routing_controllers_1.HttpCode(201),
-    __param(0, routing_controllers_1.Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Object)
-], PageController.prototype, "createPage", null);
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], PageController.prototype, "allPages", null);
 PageController = __decorate([
     routing_controllers_1.JsonController()
 ], PageController);
