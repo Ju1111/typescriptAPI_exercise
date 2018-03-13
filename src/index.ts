@@ -5,6 +5,7 @@ import setupDb from './db'
 import UserController from './users/controller'
 import LoginController from './logins/controller'
 import { Action } from 'routing-controllers'
+import { verify } from './jwt'
 
 const app = createKoaServer({
   controllers: [
