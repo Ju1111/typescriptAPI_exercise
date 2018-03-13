@@ -21,6 +21,7 @@ export default class User extends BaseEntity {
   lastName: string
 
   @IsEmail()
+  @Column('text')
   email: string
 
   @IsString()
