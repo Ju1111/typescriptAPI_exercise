@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
+import { IsString, IsEmail, MinLength } from 'class-validator'
 
 @Entity()
 export default class User extends BaseEntity {
@@ -7,15 +8,21 @@ export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id?: number
 
-  @Column('text', {nullable:false})
+  @IsString()
+  @MinLength(2)
+  @Column('text')
   firstName: string
 
-  @Column('text', {nullable:false})
+  @IsString()
+  @MinLength(2)
+  @Column('text')
   lastName: string
 
-  @Column('text', {nullable:false})
+  @IsEmail()
   email: string
 
+  @IsString()
+  @MinLength(3)
   @Column('text')
   city: string
 }
