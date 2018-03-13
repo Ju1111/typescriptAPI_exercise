@@ -1,8 +1,7 @@
 import 'reflect-metadata'
 import {createKoaServer} from "routing-controllers"
 import PageController from './pages/controller'
-
-const port = process.env.PORT || 4000
+import setupDb from './db'
 
 const app = createKoaServer({
   controllers: [
@@ -10,4 +9,8 @@ const app = createKoaServer({
   ]
 })
 
-app.listen(port, () => console.log(`Listening on port ${port}`))
+setupDb()
+  .then(_ =>
+    app.listen(4000, () => console.log('Listening on port 4000'))
+  )
+  .catch(err => console.error(err))
